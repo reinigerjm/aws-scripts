@@ -23,6 +23,8 @@ echo "Updating www-server-autoscaling Launch Template to use the new image "$IMA
 #Create a new Launch Template version
 aws ec2 create-launch-template-version --launch-template-name www-server-autoscaling --source-version '$Latest' --launch-template-data '{"ImageId":"'$IMAGEID'"}'
 
+#Tag the new image
+aws ec2 create-tags --resources $IMAGEID --tags Key=Application,Value=www-server Key=Environment,Value=production
 
 #Then, same thing for EventSprout
 
@@ -43,3 +45,6 @@ echo "Updating eventsprout-server-autoscaling Launch Template to use the new ima
 
 #Create a new Launch Template version
 aws ec2 create-launch-template-version --launch-template-name eventsprout-server-autoscaling --source-version '$Latest' --launch-template-data '{"ImageId":"'$IMAGEID'"}'
+
+#Tag the new image
+aws ec2 create-tags --resources $IMAGEID --tags Key=Application,Value=eventsprout Key=Environment,Value=production
