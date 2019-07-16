@@ -3,8 +3,8 @@
 
 #First, the webserver
 
-/home/ec2-user/aws-www-server-imaging.sh
+/home/ec2-user/aws-scripts/aws-www-server-imaging.sh
 
 #Then, same thing for EventSprout
 
-/home/ec2-user/aws-eventsprout-imaging.sh
+/home/ec2-user/aws-scripts/aws-eventsprout-imaging.sh
