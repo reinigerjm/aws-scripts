@@ -1,5 +1,4 @@
 #!/bin/bash
-#To be run by cron on aws-controller instance at 0100 Central each day
 
 DATE=`date +%Y%m%d-%k%M`
 
