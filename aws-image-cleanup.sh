@@ -20,7 +20,9 @@ do
 	aws ec2 delete-snapshot --snapshot-id $SNAPSHOT --dry-run
 done
 
+echo
 echo "www-server images cleaned up"
+echo
 
 #Now repeat for eventsprout-server
 
@@ -39,3 +41,7 @@ do
 	echo "Deleting snapshot" $SNAPSHOT
 	aws ec2 delete-snapshot --snapshot-id $SNAPSHOT --dry-run
 done
+
+echo
+echo "eventsprout images cleaned up"
+echo
