@@ -9,15 +9,16 @@ DATEMINUS3=$(date -d "$DATE - 3 days" +%Y-%m-%d)
 declare -a TBD=(`aws ec2 describe-images --filters "Name=tag:Application,Values=www-server" "Name=tag:Environment,Values=production" --query "Images[*].[ImageId,CreationDate]" --output=json | jq -r '.[] | select (.[1]< "'$DATEMINUS3' | gmtime | todate") | .[0]'`)
 
 echo "Found "${#TBD[@]}" www-server images older than 3 days"
+echo
 
 #And then delete them along with their snapshots
 for i in "${TBD[@]}"
 do 
 	echo "Deleting image" $i
-	aws ec2 deregister-image --image-id $i --dry-run
+	aws ec2 deregister-image --image-id $i
 	SNAPSHOT=`aws ec2 describe-snapshots --filters "Name=description,Values=*"$i"*" --query 'Snapshots[*].SnapshotId' --output text`
 	echo "Deleting snapshot" $SNAPSHOT
-	aws ec2 delete-snapshot --snapshot-id $SNAPSHOT --dry-run
+	aws ec2 delete-snapshot --snapshot-id $SNAPSHOT
 done
 
 echo
@@ -31,15 +32,16 @@ echo
 declare -a TBD=(`aws ec2 describe-images --filters "Name=tag:Application,Values=eventsprout" "Name=tag:Environment,Values=production" --query "Images[*].[ImageId,CreationDate]" --output=json | jq -r '.[] | select (.[1]< "'$DATEMINUS3' | gmtime | todate") | .[0]'`)
 
 echo "Found "${#TBD[@]}" eventsprout images older than 3 days"
+echo
 
 #And then delete them along with their snapshots
 for i in "${TBD[@]}"
 do 
 	echo "Deleting image" $i
-	aws ec2 deregister-image --image-id $i --dry-run
+	aws ec2 deregister-image --image-id $i
 	SNAPSHOT=`aws ec2 describe-snapshots --filters "Name=description,Values=*"$i"*" --query 'Snapshots[*].SnapshotId' --output text`
 	echo "Deleting snapshot" $SNAPSHOT
-	aws ec2 delete-snapshot --snapshot-id $SNAPSHOT --dry-run
+	aws ec2 delete-snapshot --snapshot-id $SNAPSHOT
 done
 
 echo
