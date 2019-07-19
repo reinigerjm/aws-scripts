@@ -8,3 +8,7 @@ sh /home/ec2-user/aws-scripts/aws-www-server-imaging.sh </dev/null
 #Then, same thing for EventSprout
 
 sh /home/ec2-user/aws-scripts/aws-eventsprout-imaging.sh </dev/null
+
+#Then, cleanup old images and snapshots
+
+sh /home/ec2-user/aws-scripts/aws-image-cleanup.sh </dev/null
