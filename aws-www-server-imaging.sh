@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DATE=`date +%Y%m%d-%k%M`
+DATE=`date +%Y%m%d-%H%M`
 
 #Get variables
 INSTANCEID=`aws ec2 describe-instances --filters "Name=tag:Name,Values=www-server1" "Name=instance-state-name,Values=running" --query Reservations[*].Instances[*].[InstanceId] --output text`
